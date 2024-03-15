@@ -1,0 +1,29 @@
+=== Default Key Bindings ===
+
+]c = jump to next change
+[c = jump to previous change
+do = get changes from other window into the current window
+dp = put the changes from the curent window into the other window
+zo = open fold
+zc = close fold
+zr = reduce the fold level by 1
+zm = incease the fold level by 1 (1 more fold level)
+
+:diffu = recalculate the diff
+
+=== Recommended Additional Mappings ===
+
+nd -> ]c = "next diff"
+pd -> [c = "previous diff"
+ad -> do = "accept diff"
+
+rd -> :diffu = "re-diff"
+
+To put these mappings in your vimdiff, add the following to your ~/.vimrc file
+if &diff
+  nnoremap nd ]c
+  nnoremap pd [c
+  nnoremap ad do
+  nnoremap rd :diffu
+endif
+

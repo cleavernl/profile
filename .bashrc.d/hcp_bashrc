@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Hardware Control specific items
+
+# Quick cd's
+alias pdp="cd ${WORKING}/hcp/pdp"
+alias rcp="cd ${WORKING}/hcp/rcp"
+alias amp="cd ${WORKING}/hcp/amp"
+alias cics="cd ${WORKING}/hcp/pdp/cics-pdp"

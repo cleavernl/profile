@@ -1,0 +1,8 @@
+-R
+--recurse=yes
+--python-kinds=-i
+--c++-kinds=+p
+--extra=+q
+--fields=+iaS
+--exclude=.git
+--exclude=\*.min.\*

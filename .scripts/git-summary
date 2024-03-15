@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git log -1 $1
+echo ""
+git show --stat --oneline $1

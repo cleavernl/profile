@@ -1,0 +1,41 @@
+CD Writing
+
+STEP 1 - Cut a new CD in Esentry
+  - Go to the computer at the fromt and grab either a CD or DVD to transfer files (based on the size you need)
+  - CD : 700 MB
+  - DVD: 4.4 GB
+  - For classified CDs
+    - Classifier = you
+    - Dissemination Controls = N/A
+    - Derived From = Multiple Sources (latest version)
+
+STEP 2 - Print label
+  - Esentry has a print label option and you can use that to print the label for your CD
+  - fill out the imformation on the CD entry including dates for virus scan, finalized, and media creation date
+  - save and close that menu and right click on the listing and say "print optical lable"
+
+STEP 3 - Fill out Log Book
+  - fill in all the required information in the data transfer log book
+
+STEP 4 - Burn CD (k3b)                                                                 | STEP 4 - Burn CD (no k3b)
+  - This is an interface for cd writing necessities                                    |  - mkisofs -rJ -o /tmp/cd.img <files-you-want>
+  - Select New Data Project (bottom middle)                                            |  - this creates the cd image to be burned
+  - Click and drag all the needed files to the bottom of the interface                 |  - wodim /tmp/cd.img
+  - Select Burn                                                                        |  - this burns the cd image into the cd
+  - Under the misc tab, change the multisession selection to No Multisession           |  - eject the cd and reinsert + mount for the next step
+  - Click Burn                                                                         |
+  - Afterwards the CD should automatically eject                                       |
+                                                                                       |
+STEP 5 - Write Protected (k3b)                                                         | STEP 5 - Write Protected (no k3b)
+  - reinsert your CD and mount it as needed (sudo mount /dev/sr0 /mnt/cd)              |  - go through the same process of mkisofs and wodim on some nonsense file
+  - In the k3b interface, select Device > Mount                                        |  - if the wodim process fails, the CD is write protected
+  - Right click the volume name and select Media Info and make sure Rewritable is No   |
+
+STEP 6 - avscan
+  - easy enough... clamscan -r /mnt/cd/*
+
+STEP 7 - Done
+  - Now you can pop out your CD and transfer the files to wherever they need to go
+
+sudo mount /dev/sr0 /mnt/cd && clamscan -r /mnt/cd/*
+sudo umount /mnt/cd && eject

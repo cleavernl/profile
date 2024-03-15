@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Special Signals specific items
+
+alias libss="cd ${WORKING}/ss/libss"
+

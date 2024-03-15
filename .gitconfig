@@ -1,0 +1,57 @@
+[user]
+  name = Nicholas Cleaver
+  email = nicholas.cleaver@l3harris.com
+[alias]
+  cgl = config --global --list
+  cge = config --global --edit
+  cll = config --local --list
+  cle = config --local --edit
+  st = status
+  ss = status --short
+  ci = commit
+  co = checkout
+  br = branch
+  ch = cherry-pick
+  ba = branch --all -vv
+  top = rev-parse --show-toplevel
+  pull = pull --recurse-submodules
+  sinit = submodule update --init --recursive
+  supdate = submodule update --remote --checkout --recursive
+  sadd = submodule add
+  spush = push --recurse-submodules=on-demand
+  tags = for-each-ref --sort=\"-taggerdate\" --count=10 --format='%(refname:short) <%(taggername)> (%(taggerdate:local))\n' 'refs/tags/*'
+  tagsv = for-each-ref --sort=\"-taggerdate\" --count=10 --format='%(refname:short) <%(taggername)> %(contents:subject) (%(taggerdate:local))\n' 'refs/tags/*'
+  tagsvv = for-each-ref --sort=\"-taggerdate\" --count=10 --format='%(refname:short) <%(taggername)> %(contents:subject) (%(taggerdate:local))\n%(contents:body)\n' 'refs/tags/*'
+  tagsa = for-each-ref --sort=\"-taggerdate\" --format='%(refname:short) <%(taggername)> (%(taggerdate:local))' 'refs/tags/*'
+  df = difftool --tool=vimdiff
+  d = difftool --dir-diff
+  ds = difftool --dir-diff --staged
+  sync = !git remote prune origin && git tag -l | xargs git tag -d > /dev/null && git fetch -t -q && git remote set-head origin -a
+  ctags = !.git/hooks/ctags
+[core]
+  editor = vimx
+[color]
+  ui = auto
+[push]
+  default = upstream
+  recurseSubmodules = check
+[merge]
+  defaultToUpstream = true
+  tool=meld
+[rerere]
+  enabled = true
+[status]
+  submoduleSummary = true
+[submodule]
+  recurse = true
+[diff]
+  tool = meld
+[difftool]
+  prompt = false
+[difftool "vimdiff"]
+  cmd = vimdiff -f -d -c 'wincmd l' -c 'cd $GIT_PREFIX' -c 'normal gg]c' $LOCAL $REMOTE
+[init]
+  templatedir = ~/.git_template
+  defaultBranch = main
+[pull]
+  rebase = false

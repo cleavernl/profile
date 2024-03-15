@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "--graph " \
+     "--pretty=format:'%C(bold red)%h%Creset %C(cyan)<%an>%Creset%C(bold yellow)%d%Creset %s %C(magenta)(%cd)%Creset%n' " \
+     "--abbrev-commit " \
+     "--date=local" \
+     "--decorate=short"
+

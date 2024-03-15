@@ -1,0 +1,12 @@
+#!/bin/bash
+HELPERS="$(dirname $(readlink -f "$0"))/helpers"
+
+CMD="$(${HELPERS}/bonsai-trunk) -5"
+
+if [ $# != 0 ]; then
+  CMD="${CMD} --tags=*${1}* --branches=*${1}* --remotes=*${1}* ${*:2}"
+fi
+
+echo -e "${CMD}"
+eval ${CMD}
+
