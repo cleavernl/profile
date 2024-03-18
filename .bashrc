@@ -81,12 +81,14 @@ function time_command() {
   # example:
   #   time_command make -j12
   #
-  local START_TIME END_TIME RUN_TIME
+  local START_TIME END_TIME RUN_TIME RET
   START_TIME=$(date +%s)
   eval $*
+  RET=$?
   END_TIME=$(date +%s)
   RUN_TIME=$((END_TIME-START_TIME))
   echo -e "\n\033[33;1mCompleted in $(date -u -d @$RUN_TIME +%H:%M:%S)\033[0m"
+  return ${RET}
 }
 
 function print_command() {
@@ -103,6 +105,7 @@ function print_command() {
   CMD="$*"
   echo -e "\033[33m${CMD}\033[0m"
   eval ${CMD}
+  return $?
 }
 
 # Time and print the command
@@ -243,18 +246,20 @@ function makefe() {
   # failed in your compile if the output is very large
   # NOTE: unfortunately, this command will also strip any colors that would normally exist
   #
-  local TEMP_DIR ERR_FILE
+  local TEMP_DIR ERR_FILE RET
   TEMP_DIR="/tmp/makefe$(pwd)"
   ERR_FILE="${TEMP_DIR}/makefe-stderr-$(date +%s)"
 
   mkdir -p -m 775 $TEMP_DIR
 
   tp make -j$(nproc) $* 2> >(tee ${ERR_FILE})
+  RET=$?
 
   echo -e "\n\033[33;1mSTDERR:\033[0m"
   cat ${ERR_FILE}
 
   rm ${ERR_FILE}
+  return ${RET}
 }
 
 # perform a threaded make and time how long it takes

@@ -13,7 +13,7 @@ I have adapted their ideas to better suit my needs to create what you see here.
     ```
 1. Clone this bare repository at `~/.files`
     ```
-    git clone --bare ${HOME}/.files
+    git clone --bare <git-url> ${HOME}/.files
     ```
 1. Checkout the files
     * NOTE: after running this, you may get some git complaints about files already existing. If this is the case, just remove those files and rerun the command.
@@ -34,6 +34,10 @@ I have adapted their ideas to better suit my needs to create what you see here.
 1. Create a new bare repository at `~/.files`
     ```
     git init --bare ${HOME}/.files
+    ```
+1. Set the repository to ignore all untracked files
+    ```
+    dotgit config --local status.showUntrackedFiles no
     ```
 1. Add any files you care about and push up like normal, but use `dotgit` instead of `git`
     ```
