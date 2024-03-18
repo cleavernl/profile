@@ -294,21 +294,6 @@ function podman-here() {
 }
 
 # --------------------------------- #
-#  CUSTOM CONFIGURATION             #
-# --------------------------------- #
-
-#
-# I am part of the rotation program which requires me to change bash configurations
-# often. To support this, I have customized bashrc files for each of the teams I have
-# been to which I will source if my variables up top have been set correctly.
-#
-
-[[ "${HCP}" != "" ]] && source ${HOME}/.bashrc.d/hcp_bashrc > /dev/null 2>&1
-[[ "${FDP}" != "" ]] && source ${HOME}/.bashrc.d/fdp_bashrc > /dev/null 2>&1
-[[ "${SS}" != "" ]] && source ${HOME}/.bashrc.d/ss_bashrc > /dev/null 2>&1
-
-
-# --------------------------------- #
 #  BASH COMPLETION FUNCTIONS        #
 # --------------------------------- #
 
@@ -342,6 +327,20 @@ function _podman_image_name_completion() {
 }
 
 complete -F _podman_image_name_completion podman-here
+
+# --------------------------------- #
+#  CUSTOM CONFIGURATION             #
+# --------------------------------- #
+
+#
+# I am part of the rotation program which requires me to change bash configurations
+# often. To support this, I have customized bashrc files for each of the teams I have
+# been to which I will source if my variables up top have been set correctly.
+#
+
+[[ "${HCP}" != "" ]] && source ${HOME}/.bashrc.d/hcp_bashrc > /dev/null 2>&1
+[[ "${FDP}" != "" ]] && source ${HOME}/.bashrc.d/fdp_bashrc > /dev/null 2>&1
+[[ "${SS}" != "" ]] && source ${HOME}/.bashrc.d/ss_bashrc > /dev/null 2>&1
 
 
 # --------------------------------- #
