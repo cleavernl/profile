@@ -3,6 +3,11 @@ silent! execute pathogen#infect()
 
 " mouse activation
 set mouse=a
+if has("mouse_sgr")
+  set ttymouse=sgr
+else
+  set ttymouse=xterm2
+end
 " turn on line numbers
 set nu
 " universal clipboard
@@ -91,7 +96,8 @@ command! SV source ~/.vimrc
 " easy comments
 inoremap /**/     /*<Space><Space>*/<Esc>hhi
 inoremap CASE:    case :<Esc>obreak;<Esc>k<End>i
-inoremap TDR      # TODO: Remove me
+"inoremap TDR      # TODO: Remove me
+inoremap TDR      // TODO: Remove me
 
 inoremap PRED       \033[31m\033[0m<Esc>hhhhhhi
 inoremap PGREEN     \033[32m\033[0m<Esc>hhhhhhi
@@ -101,15 +107,21 @@ inoremap PPURP      \033[35m\033[0m<Esc>hhhhhhi
 inoremap PCYAN      \033[36m\033[0m<Esc>hhhhhhi
 
 "
+" c++ logger statements
+"
+
+inoremap LGTMP  printf("\033[33m >>> \033[0m"); // TODO: Remove me<Esc>hhhhhhhhhhhhhhhhhhhhhhhhhhhhi
+
+"
 " python logger statements
 "
 
-inoremap LGTMP  LOGGER.critical(f"\033[35m\033[0m") # TODO: Remove me<Esc>hhhhhhhhhhhhhhhhhhhhhhhhhhi
-inoremap LGDB   LOGGER.debug(f"")<Esc>hi
-inoremap LGIN   LOGGER.info(f"")<Esc>hi
-inoremap LGWA   LOGGER.warning(f"")<Esc>hi
-inoremap LGER   LOGGER.error(f"")<Esc>hi
-inoremap LGCR   LOGGER.critical(f"")<Esc>hi
+"inoremap LGTMP  LOGGER.critical(f"\033[35m\033[0m") # TODO: Remove me<Esc>hhhhhhhhhhhhhhhhhhhhhhhhhhi
+"inoremap LGDB   LOGGER.debug(f"")<Esc>hi
+"inoremap LGIN   LOGGER.info(f"")<Esc>hi
+"inoremap LGWA   LOGGER.warning(f"")<Esc>hi
+"inoremap LGER   LOGGER.error(f"")<Esc>hi
+"inoremap LGCR   LOGGER.critical(f"")<Esc>hi
 "inoremap LGFDP  self.logger.critical_u("\033[33m >>> \033[0m".format()) # TODO Remove me<Esc>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhi
 
 "

@@ -26,10 +26,10 @@ TESTING="${HOME}/testing"
 ulimit -c unlimited
 
 # always use vimx
-alias vim=vimx
+#alias vim=vimx
 
 # Add some local paths to the PATH
-export PATH=${HOME}/.scripts:$PATH
+export PATH="${HOME}/.scripts:${PATH}"
 
 # used by ls for some specific formats
 export LS_COLORS="di=94:ow=1;34;47:ln=1;33:or=31:ex=93"
