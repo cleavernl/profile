@@ -38,4 +38,4 @@ STEP 7 - Done
   - Now you can pop out your CD and transfer the files to wherever they need to go
 
 sudo mount /dev/sr0 /mnt/cd && clamscan -r /mnt/cd/*
-sudo umount /mnt/cd && eject
+sudo umount /mnt/cd && wodim /tmp/cd.img || eject
