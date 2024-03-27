@@ -5,4 +5,3 @@
 alias libss="cd ${WORKING}/ss/libss"
 alias copy="cd ${WORKING}/ss/rcecopy"
 
-alias rce4a="print_command ssh -t rce4a HOME=/home/rce_user/cleavernl bash -l"

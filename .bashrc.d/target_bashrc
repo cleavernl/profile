@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#
+# COPY things
+#
+
+alias copyRemount="print_command sudo mount -o remount,rw /opt/RSM/COPY"
+alias copyLogs="cat ${HOME}/.reference/copyLogs_info"
+
+alias copyIp="print_command sudo ip address add 172.18.4.31/24 dev data0"
+
+alias copyStart="print_command /opt/RSM/COPY/tools/playlists/Start.sh"
+alias copyStop="print_command /opt/RSM/COPY/tools/playlists/Start.sh"
+

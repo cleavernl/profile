@@ -179,6 +179,7 @@ alias oss="ssh -Y ssc-oss.u.l3"
 alias ginko="ssh -Y ginko.u.l3"
 alias gremlin="ssh -Y gremlin.u.l3"
 alias meteorite="ssh -Y meteorite.u.l3"
+alias rce4a="ssh -Y rce4a"
 # == U.L3 == #
 
 # --------------------------------- #
@@ -202,6 +203,8 @@ alias vrc="vim ~/.vimrc"
 alias hcrc="vim ${HOME}/.bashrc.d/hcp_bashrc"
 alias frc="vim ${HOME}/.bashrc.d/fdp_bashrc"
 alias ssrc="vim ${HOME}/.bashrc.d/ss_bashrc"
+alias hrc="vim ${HOME}/.bashrc.d/${HOSTNAME}_bashrc"
+alias tgrc="vim ${HOME}/.bashrc.d/target_bashrc"
 
 # default some grep flags
 alias grep="grep --color=auto --exclude-dir=.svn --exclude-dir=.git --binary-files=without-match --exclude=*.min* --exclude=tags"
@@ -228,6 +231,7 @@ alias david="echo 'calico'"
 alias sam="echo 'laviren'"
 alias brendan="echo 'miura'"
 alias cavett="echo 'gremlin'"
+alias blaine="echo 'thunderbird'"
 # == U.L3 == #
 
 # --------------------------------- #
@@ -343,9 +347,21 @@ complete -F _podman_image_name_completion podman-here
 # been to which I will source if my variables up top have been set correctly.
 #
 
-[[ "${HCP}" != "" ]] && source ${HOME}/.bashrc.d/hcp_bashrc > /dev/null 2>&1
-[[ "${FDP}" != "" ]] && source ${HOME}/.bashrc.d/fdp_bashrc > /dev/null 2>&1
-[[ "${SS}" != "" ]] && source ${HOME}/.bashrc.d/ss_bashrc > /dev/null 2>&1
+[[ "${HCP}" != "" ]] && source ${HOME}/.bashrc.d/hcp_bashrc
+[[ "${FDP}" != "" ]] && source ${HOME}/.bashrc.d/fdp_bashrc
+[[ "${SS}" != "" ]] && source ${HOME}/.bashrc.d/ss_bashrc
+# If there is a bashrc file specific to the hostname, use it
+[[ -f "${HOME}/.bashrc.d/${HOSTNAME}_bashrc" ]] && source ${HOME}/.bashrc.d/${HOSTNAME}_bashrc
+
+# Use regex to match a list of target machines which all want to source the same bashrc file
+TARGETS=("^RCE[0-9]+[A-D]$")
+for pattern in "${TARGETS[@]}"; do
+  if [[ "${HOSTNAME}" =~ $pattern ]]; then
+    source ${HOME}/.bashrc.d/target_bashrc
+    break
+  fi
+done
+
 
 
 # --------------------------------- #
