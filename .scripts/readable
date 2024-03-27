@@ -1,0 +1,34 @@
+#!/bin/bash
+
+function make_readable() {
+  local PARENT_DIR CMD_PREFIX
+  PARENT_DIR="."
+  CMD_PREFIX=""
+
+  while getopts ":s:d:" opt; do
+    case ${opt} in
+      s)
+        CMD_PREFIX="sudo ${CMD_PREFIX}"
+        ;;
+      d)
+        PARENT_DIR="${OPTARG}"
+        ;;
+      \?)
+        echo "Invalid option: -${OPTARG}" >&2
+        return 1
+        ;;
+      :)
+        echo "Option -${OPTARG} requires an argument." >&2
+        return 1
+        ;;
+    esac
+  done
+
+  # Make all directories +rx
+  tp find ${PARENT_DIR} -type d -exec ${CMD_PREFIX}chmod a+rx {} \;
+  # Make all filed +r
+  tp find ${PARENT_DIR} -type f -exec ${CMD_PREFIX}chmod a+r {} \;
+}
+
+make_readable $*
+
