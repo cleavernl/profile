@@ -163,9 +163,28 @@ alias hcp="cd ${WORKING}/hcp"
 alias fdp="cd ${WORKING}/fdp"
 alias ss="cd ${WORKING}/ss"
 function gtop() {
-  local GIT_TOP
+  # This function will bring you to the top level of your git repository regardless how many
+  # submodules deep you are. Additionally, it will ensure a "cd -" will still work to put you
+  # back to where you were
+  #
+  local GIT_TOP TEMP START
   GIT_TOP=$(git rev-parse --show-toplevel)
-  [[ $? == 0 ]] && cd ${GIT_TOP}
+  [ $? -ne 0 ] && return 1
+
+  START=$(pwd)
+  while [ true ]; do
+    cd ${GIT_TOP}/..
+    # Check if there is another layer of submodules
+    TEMP=$(git rev-parse --show-toplevel 2> /dev/null)
+    if [ $? -eq 0 ]; then
+      GIT_TOP="${TEMP}"
+    else
+      # Go back to the start so a "cd -" will go to the right place
+      cd ${START}
+      cd ${GIT_TOP}
+      return 0
+    fi
+  done
 }
 
 # == U.L3 == #
