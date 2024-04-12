@@ -5,7 +5,7 @@ I have adapted their ideas to better suit my needs to create what you see here.
 
 [TOC]
 
-## Seting up a new environment with this dotgit repository
+## New Computer Setup
 ### Quickstart
 1. Set up the `dotgit` alias 
     ```
@@ -20,6 +20,17 @@ I have adapted their ideas to better suit my needs to create what you see here.
     ```
     dotgit checkout
     ```
+
+### Additional Settings
+These settings are things I like to setup on any new computer I use that are not related to `dotgit`, but are very important to my workflow.
+1. Install `gnome-tweaks` (if necessary) and use it to set workspaces and dark theme
+1. Set keyboard shortcuts for super+\<number\> and super+shift+\<number\>
+1. Disable super+\<number\> defaults
+    ```
+    for i in {1..9}; do gsettings set org.gnome.shell.keybindings switch-to-application-$i "[]"; done
+    ```
+1. Set terminal profile colors based on `colorInfo`
+
 
 ## Setting up your own dotgit repository
 ### Quickstart
