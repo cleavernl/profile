@@ -110,7 +110,8 @@ inoremap PCYAN      \033[36m\033[0m<Esc>hhhhhhi
 " c++ logger statements
 "
 
-inoremap LGTMP  printf("\033[33m >>> \033[0m"); // TODO: Remove me<Esc>hhhhhhhhhhhhhhhhhhhhhhhhhhhhi
+"inoremap LGTMP  printf("\033[33m >>> \033[0m"); // TODO: Remove me<Esc>hhhhhhhhhhhhhhhhhhhhhhhhhhhhi
+inoremap LGTMP  FATAL_MSG("\n >>>>>>\n >>>>>> \n >>>>>>"); // TODO: Remove me<Esc>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhi
 
 "
 " python logger statements

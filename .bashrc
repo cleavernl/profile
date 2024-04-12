@@ -72,14 +72,14 @@ function rgb() {
   fi
 }
 
-function time_command() {
+function timec() {
   # This function will time a provided command and print out how long it took
   # to run in HH:MM:SS format after it finishes
   #
   # $*    The command to run
   #
   # example:
-  #   time_command make -j12
+  #   timec make -j12
   #
   local START_TIME END_TIME RUN_TIME RET
   START_TIME=$(date +%s)
@@ -91,7 +91,7 @@ function time_command() {
   return ${RET}
 }
 
-function print_command() {
+function printc() {
   # This function will simple print out the command passed to it before executing
   # it. It uses some formatting to make the command printed out more visible in
   # cases where the command makes a lot of output.
@@ -99,7 +99,7 @@ function print_command() {
   # $*  the command to print
   #
   # example:
-  #   print_command scl enable devtoolset-11 'cmake3 .. -DCMAKE_BUILD_TYPE=Release'
+  #   printc scl enable devtoolset-11 'cmake3 .. -DCMAKE_BUILD_TYPE=Release'
   #
   local CMD
   CMD="$*"
@@ -109,7 +109,9 @@ function print_command() {
 }
 
 # Time and print the command
-alias tp="time_command print_command"
+function tpc() {
+  timec printc $*
+}
 
 # --------------------------------- #
 #  BASH PROMPT                      #
@@ -256,7 +258,7 @@ function makefe() {
 
   mkdir -p -m 775 $TEMP_DIR
 
-  tp make -j$(nproc) $* 2> >(tee ${ERR_FILE})
+  tpc make -j$(nproc) $* 2> >(tee ${ERR_FILE})
   RET=$?
 
   echo -e "\n\033[33;1mSTDERR:\033[0m"
@@ -267,7 +269,7 @@ function makefe() {
 }
 
 # perform a threaded make and time how long it takes
-alias makef="tp make -j$(nproc)"
+alias makef="tpc make -j$(nproc)"
 
 # --------------------------------- #
 #  PODMAN FUNCTIONS                 #
@@ -291,7 +293,7 @@ function podman-here() {
   TOP="$(git rev-parse --show-toplevel 2> /dev/null)"
   [[ $? != 0 ]] && TOP="$(pwd)"
 
-  print_command \
+  printc \
   podman run \
     --rm \
     -it \

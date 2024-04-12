@@ -1,11 +1,15 @@
 #!/bin/bash
 
+set -e
+
+source ${HOME}/.bashrc
+
 function make_readable() {
   local PARENT_DIR CMD_PREFIX
   PARENT_DIR="."
   CMD_PREFIX=""
 
-  while getopts ":s:d:" opt; do
+  while getopts ":sd:" opt; do
     case ${opt} in
       s)
         CMD_PREFIX="sudo ${CMD_PREFIX}"
@@ -18,16 +22,36 @@ function make_readable() {
         return 1
         ;;
       :)
-        echo "Option -${OPTARG} requires an argument." >&2
+        echo "Option -${opt} requires an argument." >&2
         return 1
         ;;
     esac
   done
+  
+  shift $((OPTIND-1))
+  if [ $# -eq 1 ]; then
+    if [[ "${PARENT_DIR}" == "." ]]; then
+      PARENT_DIR="$1"
+    else
+      echo "Unknown option(s): $*"
+      return 2
+    fi
+  elif [ $# -gt 1 ]; then
+    echo "Unknown option(s): $*"
+    return 2
+  fi
 
   # Make all directories +rx
-  tp find ${PARENT_DIR} -type d -exec ${CMD_PREFIX}chmod a+rx {} \;
-  # Make all filed +r
-  tp find ${PARENT_DIR} -type f -exec ${CMD_PREFIX}chmod a+r {} \;
+  echo -en "\033[33m"
+  echo -n "find ${PARENT_DIR} -type d -exec ${CMD_PREFIX}chmod a+rx {} "; echo '\;'
+  echo -en "\033[0m"
+  find ${PARENT_DIR} -type d -exec ${CMD_PREFIX}chmod a+rx {} \;
+
+  # Make all files +r
+  echo -en "\033[33m"
+  echo -n "find ${PARENT_DIR} -type f -exec ${CMD_PREFIX}chmod a+r {} "; echo '\;'
+  echo -en "\033[0m"
+  find ${PARENT_DIR} -type f -exec ${CMD_PREFIX}chmod a+r {} \;
 }
 
 make_readable $*
