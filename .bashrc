@@ -318,8 +318,9 @@ function podman-here() {
     -it \
     --entrypoint=/bin/bash \
     -w $(pwd) \
-    --volume ${TOP}:/${TOP} \
+    --volume ${TOP}:${TOP} \
     --volume ${HOME}:/root \
+    --security-opt label=disable \
     $*
 }
 
