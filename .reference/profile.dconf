@@ -1,0 +1,9 @@
+[/]
+audible-bell=false
+background-color='rgb(35,35,35)'
+bold-is-bright=false
+foreground-color='rgb(204,203,203)'
+palette=['rgb(17,17,17)', 'rgb(192,28,40)', 'rgb(57,106,64)', 'rgb(240,247,87)', 'rgb(39,62,143)', 'rgb(150,142,204)', 'rgb(65,137,159)', 'rgb(137,137,136)', 'rgb(43,42,45)', 'rgb(254,65,52)', 'rgb(86,159,97)', 'rgb(246,174,45)', 'rgb(54,135,234)', 'rgb(245,163,255)', 'rgb(128,222,217)', 'rgb(234,231,231)']
+scrollback-unlimited=true
+use-theme-colors=false
+visible-name='Profile-cleavernl'

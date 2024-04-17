@@ -147,6 +147,35 @@ function set_prompt() {
 }
 
 # --------------------------------- #
+#  GNOME PROFILE                    #
+# --------------------------------- #
+
+function gnome-profile() {
+  # This function will load in my gnome profile, set it as the default, and
+  # append it to the list of visible profiles from the "Preferences" GUI
+  #
+  which uuid > /dev/null 2>&1
+  [[ $? -ne 0 ]] && echo "Error. Install uuid first." && exit 1
+
+  local PROFILE_IDS MY_PROFILE UUID
+  UUID="$(uuid)"
+  PROFILE_IDS="$(dconf read /org/gnome/terminal/legacy/profiles:/list | tr -d "]")"
+
+  if [ -z "${PROFILE_IDS}" ]; then
+    PROFILE_IDS="['${UUID}']"
+  else
+    PROFILE_IDS="${PROFILE_IDS}, '${UUID}']"
+  fi
+
+  # Load in my profile
+  dconf load /org/gnome/terminal/legacy/profiles:/:${UUID}/ < ${HOME}/.reference/profile.dconf
+  # Add my profile to the list in the GUI
+  dconf write /org/gnome/terminal/legacy/profiles:/list "${PROFILE_IDS}"
+  # Set my profile as the default
+  gsettings set org.gnome.Terminal.ProfilesList default \'${UUID}\'
+}
+
+# --------------------------------- #
 #  QUICK CDs                        #
 # --------------------------------- #
 
