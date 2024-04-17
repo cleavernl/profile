@@ -1,4 +1,6 @@
-CD Writing
+# ------------------- #
+#  CD Writing         #
+# ------------------- #
 
 STEP 1 - Cut a new CD in Esentry
   - Go to the computer at the fromt and grab either a CD or DVD to transfer files (based on the size you need)
@@ -37,5 +39,10 @@ STEP 6 - avscan
 STEP 7 - Done
   - Now you can pop out your CD and transfer the files to wherever they need to go
 
+# ------------------- #
+#  QUICK GUIDE        #
+# ------------------- #
+
+mkisofs -rJ -o /tmp/cd.img /tmp/cd.tar.gz && wodim /tmp/cd.img && eject
 sudo mount /dev/sr0 /mnt/cd && clamscan -r /mnt/cd/*
 sudo umount /mnt/cd && wodim /tmp/cd.img || eject
