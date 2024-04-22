@@ -43,6 +43,7 @@ STEP 7 - Done
 #  QUICK GUIDE        #
 # ------------------- #
 
+rm -f /tmp/cd.* && tar -czf /tmp/cd.tar.gz ./*
 mkisofs -rJ -o /tmp/cd.img /tmp/cd.tar.gz && wodim /tmp/cd.img && eject
 sudo mount /dev/sr0 /mnt/cd && clamscan -r /mnt/cd/*
 sudo umount /mnt/cd && wodim /tmp/cd.img || eject
