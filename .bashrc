@@ -28,6 +28,7 @@ export PATH="${HOME}/.scripts:${PATH}"
 
 # used by ls for some specific formats
 export LS_COLORS="di=94:ow=30;42:ln=1;33:or=31:ex=93"
+alias ls="ls --color"
 
 # used to identify color support
 export COLORTERM="truecolor"
