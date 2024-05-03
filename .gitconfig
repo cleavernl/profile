@@ -29,7 +29,7 @@
   sync = !git remote prune origin && git tag -l | xargs git tag -d > /dev/null && git fetch -t -q && git remote set-head origin -a
   ctags = !.git/hooks/ctags
 [core]
-  editor = vimx
+  editor = vim
 [color]
   ui = auto
 [push]

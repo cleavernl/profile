@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Special Signals specific items
-
-alias libss="cd ${WORKING}/ss/libss"
-alias copy="cd ${WORKING}/ss/rcecopy"
-

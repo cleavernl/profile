@@ -12,11 +12,6 @@ fi
 #  SETUP GLOBAL VARIABLES           #
 # --------------------------------- #
 
-# Used to source team-specific bashrc files
-#HCP=1
-#FDP=1
-SS=1
-
 export EDITOR=vimx
 
 WORKING="${HOME}/working"
@@ -40,8 +35,8 @@ export COLORTERM="truecolor"
 # make make not spit out so much text
 #export MAKEFLAGS="-s"
 # adjust on the fly whether make spits out so much text
-alias makeq='echo "export MAKEFLAGS=\"-s\"" && export MAKEFLAGS="-s"'
-alias makel='echo "export MAKEFLAGS=\"\"" && export MAKEFLAGS=""'
+#alias makeq='echo "export MAKEFLAGS=\"-s\"" && export MAKEFLAGS="-s"'
+#alias makel='echo "export MAKEFLAGS=\"\"" && export MAKEFLAGS=""'
 
 # --------------------------------- #
 #  UTILITY FUNCTIONS                #
@@ -155,7 +150,7 @@ function gnome-profile() {
   # append it to the list of visible profiles from the "Preferences" GUI
   #
   which uuid > /dev/null 2>&1
-  [[ $? -ne 0 ]] && echo "Error. Install uuid first." && exit 1
+  [[ $? -ne 0 ]] && echo "Error. Install uuid first." && return 1
 
   local PROFILE_IDS MY_PROFILE UUID
   UUID="$(uuid)"
@@ -188,9 +183,6 @@ alias ....="cd ../../"
 alias ......="cd ../../../"
 alias ........="cd ../../../../"
 alias ..........="cd ../../../../../"
-alias hcp="cd ${WORKING}/hcp"
-alias fdp="cd ${WORKING}/fdp"
-alias ss="cd ${WORKING}/ss"
 function gtop() {
   # This function will bring you to the top level of your git repository regardless how many
   # submodules deep you are. Additionally, it will ensure a "cd -" will still work to put you
@@ -216,21 +208,9 @@ function gtop() {
   done
 }
 
-# == U.L3 == #
-alias RSMReleases="cd /net/eggs/space/data/eggs/RSMReleases/"
-# == U.L3 == #
-
 # --------------------------------- #
 #  QUICK SSHs                       #
 # --------------------------------- #
-
-# == U.L3 == #
-alias oss="ssh -Y ssc-oss.u.l3"
-alias ginko="ssh -Y ginko.u.l3"
-alias gremlin="ssh -Y gremlin.u.l3"
-alias meteorite="ssh -Y meteorite.u.l3"
-alias rce4a="ssh -Y rce4a"
-# == U.L3 == #
 
 # --------------------------------- #
 #  QUICK SHORTHANDS                 #
@@ -242,29 +222,19 @@ alias ll="ls -lh"
 alias lla="ls -lah"
 
 # podman imfo
-alias pman='sudo podman'
-alias pl="echo '===== PODS =====' && podman pod list && echo -e '\n===== IMAGES =====' && podman images && echo -e '\n===== CONTAINERS =====' && podman ps -a"
+#alias pman='sudo podman'
+#alias pl="echo '===== PODS =====' && podman pod list && echo -e '\n===== IMAGES =====' && podman images && echo -e '\n===== CONTAINERS =====' && podman ps -a"
 
 # Easy *rc access
 alias sb="source ~/.bashrc"
 alias brc="vim ~/.bashrc"
 alias vrc="vim ~/.vimrc"
 
-alias hcrc="vim ${HOME}/.bashrc.d/hcp_bashrc"
-alias frc="vim ${HOME}/.bashrc.d/fdp_bashrc"
-alias ssrc="vim ${HOME}/.bashrc.d/ss_bashrc"
 alias hrc="vim ${HOME}/.bashrc.d/${HOSTNAME}_bashrc"
-alias tgrc="vim ${HOME}/.bashrc.d/target_bashrc"
 
 # default some grep flags
 alias grep="grep --color=auto --exclude-dir=.svn --exclude-dir=.git --binary-files=without-match --exclude=*.min* --exclude=tags"
 alias grepf="`builtin` grep --color=auto -n"
-
-# == U.L3 == #
-# resize my terminal window to fit two monitors wide with the  monitors I have
-alias wides="resize -s 52 424"
-alias widet="resize -s 54 424"
-# == U.L3 == #
 
 # --------------------------------- #
 #  REFERENCE INFORMATION            #
@@ -274,15 +244,6 @@ alias widet="resize -s 54 424"
 alias cdInfo="cat ${HOME}/.reference/cd_info"
 alias vimdiffInfo="cat ${HOME}/.reference/vimdiff_info"
 alias colorInfo="cat ${HOME}/.reference/color_info"
-
-# == U.L3 == #
-# Hostnames for people I may care about
-alias david="echo 'calico'"
-alias sam="echo 'laviren'"
-alias brendan="echo 'miura'"
-alias cavett="echo 'gremlin'"
-alias blaine="echo 'thunderbird'"
-# == U.L3 == #
 
 # --------------------------------- #
 #  DOTGIT CONFIGURATION             #
@@ -398,20 +359,8 @@ complete -F _podman_image_name_completion podman-here
 # been to which I will source if my variables up top have been set correctly.
 #
 
-[[ "${HCP}" != "" ]] && source ${HOME}/.bashrc.d/hcp_bashrc
-[[ "${FDP}" != "" ]] && source ${HOME}/.bashrc.d/fdp_bashrc
-[[ "${SS}" != "" ]] && source ${HOME}/.bashrc.d/ss_bashrc
 # If there is a bashrc file specific to the hostname, use it
 [[ -f "${HOME}/.bashrc.d/${HOSTNAME}_bashrc" ]] && source ${HOME}/.bashrc.d/${HOSTNAME}_bashrc
-
-# Use regex to match a list of target machines which all want to source the same bashrc file
-TARGETS=("^RCE[0-9]+[A-D]$")
-for pattern in "${TARGETS[@]}"; do
-  if [[ "${HOSTNAME}" =~ $pattern ]]; then
-    source ${HOME}/.bashrc.d/target_bashrc
-    break
-  fi
-done
 
 
 
